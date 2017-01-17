@@ -71,18 +71,19 @@ func TestSimpleIdGen_Gen(t *testing.T) {
 	tests := []struct {
 		name   string
 		fields fields
-		want   string
+		want   []string
 	}{
-		{"0", fields{0}, "0"},
-		{"1", fields{1}, "1"},
+		{"0", fields{-1}, []string{"0", "1", "2"}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			s := &SimpleIdGen{
 				start: tt.fields.start,
 			}
-			if got := s.Gen(); got != tt.want {
-				t.Errorf("SimpleIdGen.Gen() = %v, want %v", got, tt.want)
+			for _, want := range tt.want {
+				if got := s.Gen(); got != want {
+					t.Errorf("SimpleIdGen.Gen() = %v, want %v", got, want)
+				}
 			}
 		})
 	}

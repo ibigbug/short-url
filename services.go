@@ -35,9 +35,7 @@ type SimpleIdGen struct {
 }
 
 func (s *SimpleIdGen) Gen() string {
-	r := s.base62(s.start)
-	atomic.AddInt64(&(s.start), 1)
-	return r
+	return s.base62(atomic.AddInt64(&(s.start), 1))
 }
 
 func (s *SimpleIdGen) base62(i int64) string {
