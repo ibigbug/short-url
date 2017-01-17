@@ -73,7 +73,8 @@ func TestSimpleIdGen_Gen(t *testing.T) {
 		fields fields
 		want   string
 	}{
-	// TODO: Add test cases.
+		{"0", fields{0}, "0"},
+		{"1", fields{1}, "1"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -101,6 +102,7 @@ func TestSimpleIdGen_base62(t *testing.T) {
 		want   string
 	}{
 		{"zero", fields{0}, args{0}, "0"},
+		{"one", fields{0}, args{1}, "1"},
 		{"max", fields{0}, args{int64(math.Pow(62.0, 6.0)) - 1}, "ZZZZZZ"},
 	}
 	for _, tt := range tests {
