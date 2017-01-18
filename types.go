@@ -1,11 +1,11 @@
 package main
 
 type ShortenParam struct {
-	Short string `json:"short"`
+	Url string `json:"url"`
 }
 
 type OriginalParam struct {
-	Original string `json:"original"`
+	Short string `json:"short"`
 }
 
 type Storage interface {

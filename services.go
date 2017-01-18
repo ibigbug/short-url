@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"math"
+	"sync"
 	"sync/atomic"
 )
 
@@ -30,6 +30,31 @@ func (s *SimpleShorter) Original(short string) (original string) {
 	return
 }
 
+type SimpleStorage struct {
+	sync.RWMutex
+	shortToLong map[string]string
+	longToShort map[string]string
+}
+
+func (s *SimpleStorage) GetByOrigin(origin string) string {
+	s.RLock()
+	defer s.RUnlock()
+	return s.longToShort[origin]
+}
+
+func (s *SimpleStorage) GetByShort(short string) string {
+	s.RLock()
+	defer s.RUnlock()
+	return s.shortToLong[short]
+}
+
+func (s *SimpleStorage) Save(short, origin string) {
+	s.Lock()
+	defer s.Unlock()
+	s.shortToLong[short] = origin
+	s.longToShort[origin] = short
+}
+
 type SimpleIdGen struct {
 	start int64
 }
@@ -45,9 +70,7 @@ func (s *SimpleIdGen) base62(i int64) string {
 	// TODO: may overflow
 	r := make([]byte, 0, 6)
 	for i != 0 {
-		fmt.Println("i", i)
 		mod := int(math.Mod(float64(i), 62.0))
-		fmt.Println("mod", mod)
 		r = append(r, CHAR_MAPPING[mod])
 		i = i / 62
 	}
@@ -58,6 +81,17 @@ func (s *SimpleIdGen) base62(i int64) string {
 }
 
 func NewShortService(idGen IdGenerator, storage Storage) *SimpleShorter {
+	if idGen == nil {
+		idGen = &SimpleIdGen{
+			start: 0,
+		}
+	}
+	if storage == nil {
+		storage = &SimpleStorage{
+			shortToLong: map[string]string{},
+			longToShort: map[string]string{},
+		}
+	}
 	return &SimpleShorter{
 		idGen:   idGen,
 		storage: storage,
