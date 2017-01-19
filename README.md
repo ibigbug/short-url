@@ -1,5 +1,8 @@
 # short-url
 
+[![Build Status](https://travis-ci.org/ibigbug/short-url.svg?branch=master)](https://travis-ci.org/ibigbug/short-url)
+[![Coverage Status](https://coveralls.io/repos/github/ibigbug/short-url/badge.svg?branch=master)](https://coveralls.io/github/ibigbug/short-url?branch=master)
+
 Simple short url service
 
 # Start the service
