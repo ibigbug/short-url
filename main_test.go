@@ -5,7 +5,7 @@ import "net/http"
 import "strings"
 import "net/http/httptest"
 
-func BenchmarkShorten(t *testing.B) {
+func BenchShort(t *testing.B) {
 	req, err := http.NewRequest("POST", "/shorten", strings.NewReader(`{"url":"http://a.very.long.url"}`))
 	if err != nil {
 		t.Fatal(err)

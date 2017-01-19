@@ -31,7 +31,8 @@ func OriginalHandler(w http.ResponseWriter, r *http.Request) {
 	var params OriginalParam
 	err := decoder.Decode(&params)
 	if err != nil || params.Short == "" {
-		http.Error(w, "Malformed JSON body", http.StatusBadRequest)
+		http.Error(w, "Malformed JSON body: "+err.Error(), http.StatusBadRequest)
+		panic(params.Short)
 		return
 	}
 
