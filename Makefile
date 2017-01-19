@@ -1,8 +1,5 @@
-run: build
-	./bin/short-url
-
-build:
-	sh ./scripts/build.sh
+run: 
+	sh ./scripts/start.sh
 
 dev:
 	go run main.go middlewares.go handlers.go services.go types.go
