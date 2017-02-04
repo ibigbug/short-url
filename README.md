@@ -10,7 +10,7 @@ Simple short url service
 ## Docker
 
 ```
-$ docker run -e PORT=80 -e ADDR=0.0.0.0 -p 8000:80 --rm -it ibigbug/short-url
+$ docker run -e PORT=80 -e ADDR=0.0.0.0 -p 8000:80 -e SITE_URL=YOUR_DOMAIN --rm -it ibigbug/short-url
 ```
 
 ## Clean Virtual Machine
