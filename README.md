@@ -7,9 +7,18 @@ Simple short url service
 
 # Start the service
 
+## Docker
+
+```
+$ docker run -e PORT=80 -e ADDR=0.0.0.0 -p 8000:80 --rm -it ibigbug/short-url
+```
+
+## Clean Virtual Machine
+
 ```
 $ git clone https://github.com/ibigbug/short-url.git
 $ cd short-url
+$ sh ./scripts/bootstrap.sh
 $ sh ./scripts/start.sh
 ```
 
