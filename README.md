@@ -25,12 +25,12 @@ $ sh ./scripts/start.sh
 # Usage
 
 ```
-$ curl -sX POST -H 'Content-Type: application/json' 'localhost:8000/shorten' -d '{"url":"http://a.very.long.url"}'
-{"short": "http://localhost/1"}
+$ curl -sX POST -H 'Content-Type: application/json' 'https://s.watfaq.com/shorten' -d '{"url":"http://a.very.long.url"}'
+{"short": "https://s.watfaq.com/1"}
 ```
 
 ```
-$ curl -sX GET -H 'Content-Type: application/json' 'localhost:8000/original' -d '{"short":"http://localhost/1"}'
+$ curl -sX GET -H 'Content-Type: application/json' 'https://s.watfaq.com/original' -d '{"short":"https://s.watfaq.com/1"}'
 {"original": "http://a.very.long.url"}
 ```
 

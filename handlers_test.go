@@ -5,6 +5,7 @@ import (
 	"math"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"strconv"
 	"strings"
 	"testing"
@@ -63,4 +64,9 @@ func TestOriginalHandler(t *testing.T) {
 			t.Fatalf("expected: %v, got: %v", expected, rr.Body.String())
 		}
 	}*/
+}
+
+func TestMain(m *testing.M) {
+	SITE_URL = "http://localhost"
+	os.Exit(m.Run())
 }
